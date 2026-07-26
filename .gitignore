@@ -22,3 +22,4 @@ build/
 # editor settings
 .vscode/
 .idea/
+*.sqlite
