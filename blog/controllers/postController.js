@@ -1,4 +1,5 @@
 const postService = require('../services/postService');
+const validationsService = require('../services/validationService');
 
 /**
  * Essa função controla o fluxo de ação de busca de todos os voos.
@@ -26,13 +27,17 @@ async function getPostById({ req, res }) {
   try {
     const { id } = req.params;
 
+    validationsService.validatePostId(id);
+
     const post = await postService.getPostById({
       id,
     });
 
     res.send({ post });
   } catch (exception) {
-    res.send({ exception });
+    res.code(exception.httpCode).send({
+      exception: exception.message,
+    });
   }
 }
 
@@ -51,7 +56,9 @@ async function createPost({ req, res }) {
 
     res.send({ newPost });
   } catch (exception) {
-    res.send({ exception });
+    res.send({
+      exception: exception.message,
+    });
   }
 }
 
