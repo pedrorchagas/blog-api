@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const errorService = require('./errorService');
 
 async function hashPassword(password) {
   const saltRounds = 10;
@@ -8,8 +9,10 @@ async function hashPassword(password) {
 }
 
 async function verifyPassword(password, hash) {
-  const valido = await bcrypt.compare(password, hash);
-  return valido;
+  const isValid = await bcrypt.compare(password, hash);
+  if (isValid === false) {
+    throw errorService.cannotLogin;
+  }
 }
 
 function generateToken({ user }) {
@@ -19,7 +22,7 @@ function generateToken({ user }) {
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET, {
-    expiresIn: '1h', // tempo de expiração
+    expiresIn: '1h',
   });
 
   return token;

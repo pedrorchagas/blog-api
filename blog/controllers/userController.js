@@ -16,9 +16,9 @@ async function createUser({ req, res }) {
       name, email, password,
     };
 
-    if (await userService.createUser({ user })) {
-      res.send({ message: 'Usuário criado! Agora faça o login' });
-    }
+    await userService.createUser({ user });
+
+    res.send({ message: 'Usuário criado! Agora faça o login' });
   } catch (exception) {
     res.send({ exception });
   }
@@ -26,20 +26,20 @@ async function createUser({ req, res }) {
 
 async function loginUser({ req, res }) {
   try {
-    const infos = req.body;
+    const { email, password } = req.body;
 
-    const user = await userService.getOneUser({ infos });
+    const user = await userService.getOneUserByEmail({ email });
 
-    if (await authService.verifyPassword(infos.password, user.password) === false) {
-      throw errorService.cannotCreateUser;
-    }
+    await authService.verifyPassword(password, user.password);
+
     const token = authService.generateToken({ user });
+
     res.send({
       message: 'Usuário logado!',
       token,
     });
-  } catch {
-    throw errorService.cannotCreateUser;
+  } catch (exception) {
+    res.send({ exception });
   }
 }
 

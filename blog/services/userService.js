@@ -4,24 +4,24 @@ const errorService = require('./errorService');
 const authService = require('./authService');
 
 async function createUser({ user }) {
-  const hashedPassowrd = await authService.hashPassword(user.password);
+  try {
+    const hashedPassowrd = await authService.hashPassword(user.password);
 
-  const newUser = {
-    ...user,
-    password: hashedPassowrd,
-  };
+    const newUser = {
+      ...user,
+      password: hashedPassowrd,
+    };
 
-  const sequelize = await databaseService.getSequelizeInstance();
-  const userCreated = await userRepository.createUser({ sequelize, user: newUser });
-
-  if (userCreated === false) {
+    const sequelize = await databaseService.getSequelizeInstance();
+    await userRepository.createUser({ sequelize, user: newUser });
+  } catch (exception) {
     throw errorService.cannotCreateUser;
   }
 }
 
-async function getOneUser({ infos }) {
+async function getOneUserByEmail({ email }) {
   const sequelize = await databaseService.getSequelizeInstance();
-  const userResponse = await userRepository.getOneUser({ sequelize, filter: infos });
+  const userResponse = await userRepository.getOneUser({ sequelize, filter: { email } });
 
   if (userResponse == null) {
     throw errorService.userNotFound;
@@ -32,5 +32,5 @@ async function getOneUser({ infos }) {
 
 module.exports = {
   createUser,
-  getOneUser,
+  getOneUserByEmail,
 };

@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-
+const dotenv = require('dotenv');
 const http = require('http');
-
 const routes = require('./blog/routes/routes');
 const databaseService = require('./blog/services/databaseService');
+
+dotenv.config();
 
 databaseService.initSequelize();
 databaseService.syncModels();
