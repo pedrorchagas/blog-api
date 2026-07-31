@@ -13,6 +13,10 @@ router.post('/', async (req, res) => {
   await userController.createUser({ req, res });
 });
 
+router.post('/login', async (req, res) => {
+  await userController.loginUser({ req, res });
+});
+
 router.put('/{id}', async (req, res) => {
 
 });

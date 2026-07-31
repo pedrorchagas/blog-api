@@ -1,4 +1,6 @@
+const errorService = require('../services/errorService');
 const userService = require('../services/userService');
+const authService = require('../services/authService');
 
 /**
  * Essa função controla o fluxo de ação de busca de todos os voos.
@@ -14,14 +16,34 @@ async function createUser({ req, res }) {
       name, email, password,
     };
 
-    const newUser = await userService.createUser({ user });
-
-    res.send({ newUser });
+    if (await userService.createUser({ user })) {
+      res.send({ message: 'Usuário criado! Agora faça o login' });
+    }
   } catch (exception) {
     res.send({ exception });
   }
 }
 
+async function loginUser({ req, res }) {
+  try {
+    const infos = req.body;
+
+    const user = await userService.getOneUser({ infos });
+
+    if (await authService.verifyPassword(infos.password, user.password) === false) {
+      throw errorService.cannotCreateUser;
+    }
+    const token = authService.generateToken({ user });
+    res.send({
+      message: 'Usuário logado!',
+      token,
+    });
+  } catch {
+    throw errorService.cannotCreateUser;
+  }
+}
+
 module.exports = {
   createUser,
+  loginUser,
 };
