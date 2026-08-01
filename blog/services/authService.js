@@ -1,6 +1,5 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const errorService = require('./errorService');
 
 async function hashPassword(password) {
   const saltRounds = 10;
@@ -10,9 +9,7 @@ async function hashPassword(password) {
 
 async function verifyPassword(password, hash) {
   const isValid = await bcrypt.compare(password, hash);
-  if (isValid === false) {
-    throw errorService.cannotLogin;
-  }
+  return isValid;
 }
 
 function generateToken({ user }) {

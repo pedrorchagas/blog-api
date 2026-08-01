@@ -1,6 +1,6 @@
-const errorService = require('../services/errorService');
 const userService = require('../services/userService');
 const authService = require('../services/authService');
+const errorService = require('../services/errorService');
 
 /**
  * Essa função controla o fluxo de ação de busca de todos os voos.
@@ -30,7 +30,11 @@ async function loginUser({ req, res }) {
 
     const user = await userService.getOneUserByEmail({ email });
 
-    await authService.verifyPassword(password, user.password);
+    const isValid = await authService.verifyPassword(password, user.password);
+
+    if (isValid === false) {
+      throw errorService.cannotLogin;
+    }
 
     const token = authService.generateToken({ user });
 

@@ -13,7 +13,9 @@ async function createUser({ user }) {
     };
 
     const sequelize = await databaseService.getSequelizeInstance();
-    await userRepository.createUser({ sequelize, user: newUser });
+    const returnUser = await userRepository.createUser({ sequelize, user: newUser });
+
+    return returnUser;
   } catch (exception) {
     throw errorService.cannotCreateUser;
   }
