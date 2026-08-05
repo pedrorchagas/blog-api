@@ -6,6 +6,10 @@ const associations = require('../models/associations');
 
 let sequelizeConn;
 
+/**
+ * Essa função inicializa a conexão com o banco de dados
+ * @returns {object} Conexão do sequelize
+ */
 async function initSequelize() {
   sequelizeConn = new Sequelize({
     dialect: 'sqlite',
@@ -14,6 +18,9 @@ async function initSequelize() {
   return sequelizeConn;
 }
 
+/**
+ * Essa função realiza a sincronização dos modelos e associações no banco de dados
+ */
 async function syncModels() {
   const user = await User(sequelizeConn);
   const post = await Post(sequelizeConn);
@@ -26,6 +33,10 @@ async function syncModels() {
   await sequelizeConn.sync();
 }
 
+/**
+ * Essa função retorna a conexão do sequelize inicializada
+ * @returns {object} Conexão do sequelize
+ */
 async function getSequelizeInstance() {
   return sequelizeConn;
 }

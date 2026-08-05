@@ -3,7 +3,7 @@ const authService = require('../services/authService');
 const errorService = require('../services/errorService');
 
 /**
- * Essa função controla o fluxo de ação de busca de todos os voos.
+ * Essa função controla o fluxo de ação de criação do usuário
  * @param {object} req Objeto da requisição do express
  * @param {res} res Objeto da resposta do express
  * @returns {number}
@@ -24,6 +24,12 @@ async function createUser({ req, res }) {
   }
 }
 
+/**
+ * Essa função controla o fluxo de ação de login dos usuários
+ * @param {object} req Objeto da requisição do express
+ * @param {res} res Objeto da resposta do express
+ * @returns {number}
+ */
 async function loginUser({ req, res }) {
   try {
     const { email, password } = req.body;

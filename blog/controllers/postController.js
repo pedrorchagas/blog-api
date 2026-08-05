@@ -2,7 +2,7 @@ const postService = require('../services/postService');
 const validationsService = require('../services/validationService');
 
 /**
- * Essa função controla o fluxo de ação de busca de todos os voos.
+ * Essa função controla o fluxo de ação de busca de todos os posts.
  * @param {object} req Objeto da requisição do express
  * @param {res} res Objeto da resposta do express
  * @returns {number}
@@ -23,6 +23,13 @@ async function getAllPosts({ req, res }) {
   }
 }
 
+
+/**
+ * Essa função controla o fluxo de ação de busca post pelo ID
+ * @param {object} req Objeto da requisição do express
+ * @param {res} res Objeto da resposta do express
+ * @returns {number}
+ */
 async function getPostById({ req, res }) {
   try {
     const { id } = req.params;
@@ -41,6 +48,13 @@ async function getPostById({ req, res }) {
   }
 }
 
+
+/**
+ * Essa função controla o fluxo de ação de criação do post.
+ * @param {object} req Objeto da requisição do express
+ * @param {res} res Objeto da resposta do express
+ * @returns {number}
+ */
 async function createPost({ req, res }) {
   try {
     const { tittle, header, body } = req.body;
@@ -62,6 +76,12 @@ async function createPost({ req, res }) {
   }
 }
 
+/**
+ * Essa função controla o fluxo de ação de edição do post pelo ID.
+ * @param {object} req Objeto da requisição do express
+ * @param {res} res Objeto da resposta do express
+ * @returns {number}
+ */
 async function editPostById({ res }) {
   try {
     res.send({ ok: 'ok' });
@@ -70,6 +90,13 @@ async function editPostById({ res }) {
   }
 }
 
+
+/**
+ * Essa função controla o fluxo de ação de remoção do post pelo ID.
+ * @param {object} req Objeto da requisição do express
+ * @param {res} res Objeto da resposta do express
+ * @returns {number}
+ */
 async function deleteById({ res }) {
   try {
     res.send({ ok: 'ok' });

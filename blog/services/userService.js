@@ -3,6 +3,11 @@ const databaseService = require('./databaseService');
 const errorService = require('./errorService');
 const authService = require('./authService');
 
+/**
+ * Essa função realiza a criação do usuário
+ * @param {Object} user Objeto do usuário
+ * @returns {Promise} promessa de criação do usuário
+ */
 async function createUser({ user }) {
   try {
     const hashedPassowrd = await authService.hashPassword(user.password);
@@ -21,6 +26,11 @@ async function createUser({ user }) {
   }
 }
 
+/**
+ * Essa função realiza a busca de usuário de acordo com o email
+ * @param {string} email Email do usuário a ser buscado
+ * @returns {Promise} Promessa de retorno do usuário
+ */
 async function getOneUserByEmail({ email }) {
   const sequelize = await databaseService.getSequelizeInstance();
   const userResponse = await userRepository.getOneUser({ sequelize, filter: { email } });

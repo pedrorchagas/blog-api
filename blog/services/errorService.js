@@ -1,3 +1,10 @@
+/**
+ * Essa função controla a criação do erro customizado.
+ * @param {number} httpCode Codigo de retorno do http
+ * @param {number} errorCode Codigo de erro interno do código
+ * @param {string} message Mensagem de erro
+ * @returns {object} Objeto formatado do erro customizado
+ */
 function CustomError(httpCode, errorCode, message) {
   return { httpCode, message, errorCode };
 }
