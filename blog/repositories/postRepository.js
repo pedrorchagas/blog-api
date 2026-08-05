@@ -37,8 +37,18 @@ async function getPostById({ sequelize, id }) {
 
   return post;
 }
+
+async function deletePostById({ sequelize, id}) {
+  await Post(sequelize).destroy({
+    where: {
+      id,
+    }
+  });
+}
+
 module.exports = {
   getAllPosts,
   createPost,
   getPostById,
+  deletePostById,
 };

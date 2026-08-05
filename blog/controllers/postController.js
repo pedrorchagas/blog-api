@@ -19,7 +19,7 @@ async function getAllPosts({ req, res }) {
 
     res.send(response);
   } catch (exception) {
-    res.send({ exception });
+    errorService.returnError(res, exception);
   }
 }
 
@@ -42,9 +42,7 @@ async function getPostById({ req, res }) {
 
     res.send({ post });
   } catch (exception) {
-    res.code(exception.httpCode).send({
-      exception: exception.message,
-    });
+    errorService.returnError(res, exception);
   }
 }
 
@@ -70,9 +68,7 @@ async function createPost({ req, res }) {
 
     res.send({ newPost });
   } catch (exception) {
-    res.send({
-      exception: exception.message,
-    });
+    errorService.returnError(res, exception);
   }
 }
 
@@ -86,7 +82,7 @@ async function editPostById({ res }) {
   try {
     res.send({ ok: 'ok' });
   } catch (exception) {
-    res.send({ exception });
+    errorService.returnError(res, exception);
   }
 }
 
@@ -97,11 +93,17 @@ async function editPostById({ res }) {
  * @param {res} res Objeto da resposta do express
  * @returns {number}
  */
-async function deleteById({ res }) {
+async function deleteById({ req, res }) {
   try {
-    res.send({ ok: 'ok' });
+    const postId = req.params['id'];
+
+    validationsService.validatePostId(postId)
+
+    await postService.getPostById({ id: postId });
+
+    res.send({ message: 'Post removido com sucesso!' });
   } catch (exception) {
-    res.send({ exception });
+    errorService.returnError(res, exception);
   }
 }
 

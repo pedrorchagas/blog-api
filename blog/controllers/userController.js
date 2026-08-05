@@ -20,7 +20,7 @@ async function createUser({ req, res }) {
 
     res.send({ message: 'Usuário criado! Agora faça o login' });
   } catch (exception) {
-    res.send({ exception });
+    errorService.returnError(res, exception);
   }
 }
 
@@ -49,7 +49,7 @@ async function loginUser({ req, res }) {
       token,
     });
   } catch (exception) {
-    res.send({ exception });
+    errorService.returnError(res, exception);
   }
 }
 

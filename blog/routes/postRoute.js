@@ -21,8 +21,8 @@ router.post('/', async (req, res) => {
 
 // Edit by id
 // apenas usuários logados
-router.put('/{id}', async (req, res) => {
-  await postController(req, res);
+router.put('/:id', async (req, res) => {
+  await postController.deleteById(req, res);
 });
 
 // Delete

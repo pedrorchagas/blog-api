@@ -43,6 +43,15 @@ async function getPostById({ id }) {
   return post;
 }
 
+async function deletePostById({ id }) {
+  try {
+    const sequelize = await databaseService.getSequelizeInstance();
+    await postRepository.deletePostById({ sequelize, id });
+  } catch (exception) {
+    throw errorService.unableDeletePost;
+  }
+}
+
 module.exports = {
   getAllPosts,
   createPost,
