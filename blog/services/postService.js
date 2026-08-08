@@ -44,10 +44,10 @@ async function getPostById({ id }) {
   return post;
 }
 
-async function deletePostById({ id }) {
+async function deletePostById({ user, id }) {
   try {
     const sequelize = await databaseService.getSequelizeInstance();
-    await postRepository.deletePostById({ sequelize, id });
+    await postRepository.deletePostById({ sequelize, id, user });
   } catch (exception) {
     throw errorService.unableDeletePost;
   }

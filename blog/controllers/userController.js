@@ -53,7 +53,34 @@ async function loginUser({ req, res }) {
   }
 }
 
+async function updateUser({ req, res }) {
+  try {
+    const lastUser = req.user;
+    const newUser = req.body.user;
+
+    await userService.updateUser({ lastUser, newUser });
+
+    res.send({ message: 'Usuário alterado com sucesso!' });
+  } catch (exception) {
+    errorService.returnError(res, exception);
+  }
+}
+
+async function getUser({ req, res }) {
+  try {
+    const userId = req.user.id;
+
+    const user = await userService.getOneUserByID({ userId });
+
+    res.send({ user });
+  } catch (exception) {
+    errorService.returnError(res, exception);
+  }
+}
+
 module.exports = {
   createUser,
   loginUser,
+  updateUser,
+  getUser,
 };

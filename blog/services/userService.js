@@ -42,7 +42,21 @@ async function getOneUserByEmail({ email }) {
   return userResponse;
 }
 
+async function updateUser({ lastUser, newUser }) {
+  const sequelize = await databaseService.getSequelizeInstance();
+  await userRepository.updateUser({ sequelize, user: lastUser, newUserData: newUser });
+}
+
+async function getOneUserByID({ userId }) {
+  const sequelize = await databaseService.getSequelizeInstance();
+  const user = await userRepository.getOneUser({ sequelize, filter: { id: userId } });
+
+  return user;
+}
+
 module.exports = {
   createUser,
   getOneUserByEmail,
+  updateUser,
+  getOneUserByID,
 };

@@ -95,10 +95,11 @@ async function editPostById({ res }) {
 async function deleteById({ req, res }) {
   try {
     const postId = req.params.id;
+    const { user } = req;
 
     validationsService.validatePostId(postId);
 
-    await postService.deletePostById({ id: postId });
+    await postService.deletePostById({ user, id: postId });
 
     res.send({ message: 'Post removido com sucesso!' });
   } catch (exception) {

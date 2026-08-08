@@ -7,12 +7,24 @@ async function createUser({ sequelize, user }) {
 
 async function getOneUser({ sequelize, filter }) {
   const user = await User(sequelize).findOne({
+    attributes: ['id', 'email', 'createdAt'],
     where: filter,
   });
   return user;
 }
 
+async function updateUser({ sequelize, user, newUserData }) {
+  await User(sequelize).update({
+    email: newUserData.email,
+  }, {
+    where: {
+      id: user.id,
+    },
+  });
+}
+
 module.exports = {
   getOneUser,
   createUser,
+  updateUser,
 };
