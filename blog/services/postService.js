@@ -1,5 +1,6 @@
 const postRepository = require('../repositories/postRepository');
 const databaseService = require('./databaseService');
+const errorService = require('./errorService');
 
 /**
  * Essa função realiza a busca de todos os posts
@@ -56,4 +57,5 @@ module.exports = {
   getAllPosts,
   createPost,
   getPostById,
+  deletePostById,
 };

@@ -1,5 +1,6 @@
 const express = require('express');
 const postController = require('../controllers/postController');
+const authMiddleware = require('../middlewares/authMiddleware');
 
 const router = express.Router();
 
@@ -15,20 +16,20 @@ router.get('/:id', async (req, res) => {
 
 // Create do post
 // apenas usuários logados
-router.post('/', async (req, res) => {
+router.post('/', authMiddleware, async (req, res) => {
   await postController.createPost({ req, res });
 });
 
 // Edit by id
 // apenas usuários logados
-router.put('/:id', async (req, res) => {
-  await postController.deleteById(req, res);
+router.put('/:id', authMiddleware, async (req, res) => {
+  await postController.editPostById({ req, res });
 });
 
 // Delete
 // apenas usuários logados
-router.delete('/{id}', async (req, res) => {
-  await postController(req, res);
+router.delete('/:id', authMiddleware, async (req, res) => {
+  await postController.deleteById({ req, res });
 });
 
 module.exports = router;

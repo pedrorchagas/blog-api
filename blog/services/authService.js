@@ -12,12 +12,11 @@ async function hashPassword(password) {
   return hash;
 }
 
-
 /**
  * Essa função realiza a comparação entre a senha inserida e o hash da senha armazanada no banco.
  * @param {string} password Senha inserida no login
  * @param {string} hash Hash da senha armazenada no banco
- * @returns {boolean} 
+ * @returns {boolean}
  */
 async function verifyPassword(password, hash) {
   const isValid = await bcrypt.compare(password, hash);

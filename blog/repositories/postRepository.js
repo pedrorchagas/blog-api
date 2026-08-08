@@ -38,11 +38,11 @@ async function getPostById({ sequelize, id }) {
   return post;
 }
 
-async function deletePostById({ sequelize, id}) {
+async function deletePostById({ sequelize, id }) {
   await Post(sequelize).destroy({
     where: {
       id,
-    }
+    },
   });
 }
 

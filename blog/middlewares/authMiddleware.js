@@ -1,20 +1,24 @@
 const jwt = require('jsonwebtoken');
+const errorService = require('../services/errorService');
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
   if (!token) {
-    return res.status(401).json({ message: 'Access token missing' });
+    return errorService.returnError(res, errorService.tokenNotFound);
   }
 
-  return jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+  return jwt.verify(token, process.env.JWT_SECRET, (err, payload) => {
     if (err) {
-      return res.status(403).json({ message: 'Invalid or expired token' });
+      return errorService.returnError(res, errorService.invalidToken);
     }
 
-    // Attach decoded user data to the request object
-    req.user = user;
+    req.user = {
+      id: payload.id,
+      email: payload.email,
+    };
+
     return next();
   });
 }

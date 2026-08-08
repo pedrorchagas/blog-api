@@ -1,3 +1,4 @@
+const errorService = require('../services/errorService');
 const postService = require('../services/postService');
 const validationsService = require('../services/validationService');
 
@@ -23,7 +24,6 @@ async function getAllPosts({ req, res }) {
   }
 }
 
-
 /**
  * Essa função controla o fluxo de ação de busca post pelo ID
  * @param {object} req Objeto da requisição do express
@@ -46,7 +46,6 @@ async function getPostById({ req, res }) {
   }
 }
 
-
 /**
  * Essa função controla o fluxo de ação de criação do post.
  * @param {object} req Objeto da requisição do express
@@ -56,12 +55,13 @@ async function getPostById({ req, res }) {
 async function createPost({ req, res }) {
   try {
     const { tittle, header, body } = req.body;
+    const userId = req.user.id;
 
     const post = {
       tittle,
       header,
       body,
-      userId: 1, // Aqui deverá puxar o id do usuário por meio do middleware de autenticação
+      userId,
     };
 
     const newPost = await postService.createPost({ post });
@@ -86,7 +86,6 @@ async function editPostById({ res }) {
   }
 }
 
-
 /**
  * Essa função controla o fluxo de ação de remoção do post pelo ID.
  * @param {object} req Objeto da requisição do express
@@ -95,11 +94,11 @@ async function editPostById({ res }) {
  */
 async function deleteById({ req, res }) {
   try {
-    const postId = req.params['id'];
+    const postId = req.params.id;
 
-    validationsService.validatePostId(postId)
+    validationsService.validatePostId(postId);
 
-    await postService.getPostById({ id: postId });
+    await postService.deletePostById({ id: postId });
 
     res.send({ message: 'Post removido com sucesso!' });
   } catch (exception) {

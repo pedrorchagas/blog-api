@@ -10,12 +10,13 @@ function CustomError(httpCode, errorCode, message) {
 }
 
 function returnError(res, exception) {
-  if (exception.httpCode != null && exception.code != null && exception.message != null) {
-    res.code(exception.httpCode).send({
+  if (exception.httpCode != null && exception.errorCode != null && exception.message != null) {
+    res.status(exception.httpCode).send({
       exception: exception.message,
+      errorCode: exception.errorCode,
     });
   } else {
-    res.code(500).send(exception);
+    res.status(500).send(exception);
   }
 }
 
