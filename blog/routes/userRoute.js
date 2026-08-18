@@ -10,11 +10,11 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Create
-router.post('/', authMiddleware, async (req, res) => {
+router.post('/', async (req, res) => {
   await userController.createUser({ req, res });
 });
 
-router.post('/login', authMiddleware, async (req, res) => {
+router.post('/login', async (req, res) => {
   await userController.loginUser({ req, res });
 });
 
