@@ -33,7 +33,7 @@ async function createUser({ user }) {
  */
 async function getOneUserByEmail({ email }) {
   const sequelize = await databaseService.getSequelizeInstance();
-  const userResponse = await userRepository.getOneUser({ sequelize, filter: { email } });
+  const userResponse = await userRepository.getOneUser({ sequelize, filter: { email }, attributes: ['password', 'email', 'id'] });
 
   if (userResponse == null) {
     throw errorService.userNotFound;

@@ -5,9 +5,9 @@ async function createUser({ sequelize, user }) {
   return true;
 }
 
-async function getOneUser({ sequelize, filter }) {
+async function getOneUser({ sequelize, filter, attributes = ['id', 'email', 'createdAt'] }) {
   const user = await User(sequelize).findOne({
-    attributes: ['id', 'email', 'createdAt'],
+    attributes,
     where: filter,
   });
   return user;
