@@ -53,9 +53,17 @@ async function deletePostById({ user, id }) {
   }
 }
 
+async function editPostById({ postId, data }) {
+  try {
+    const sequelize = await databaseService.getSequelizeInstance();
+    await postRepository.editPostById()
+  }
+}
+
 module.exports = {
   getAllPosts,
   createPost,
   getPostById,
   deletePostById,
+  editPostById,
 };

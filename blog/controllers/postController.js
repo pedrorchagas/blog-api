@@ -78,8 +78,12 @@ async function createPost({ req, res }) {
  * @param {res} res Objeto da resposta do express
  * @returns {number}
  */
-async function editPostById({ res }) {
+async function editPostById({ req, res }) {
   try {
+    const { id } = req.params;
+    const newPostData = req.body;
+
+    await postService.editPostById({ postId: id, data: newPostData });
     res.send({ ok: 'ok' });
   } catch (exception) {
     errorService.returnError(res, exception);

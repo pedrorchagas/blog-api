@@ -48,9 +48,18 @@ async function deletePostById({ sequelize, id, user }) {
   });
 }
 
+async function editPostById({ sequelize, id, data }) {
+  await Post(sequelize).update(data, {
+    where: {
+      id,
+    },
+  });
+}
+
 module.exports = {
   getAllPosts,
   createPost,
   getPostById,
   deletePostById,
+  editPostById,
 };
