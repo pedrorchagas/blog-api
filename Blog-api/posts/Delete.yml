@@ -1,0 +1,14 @@
+info:
+  name: Delete
+  type: http
+
+http:
+  method: DELETE
+  url: http://0.0.0.0:3000/post/1
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

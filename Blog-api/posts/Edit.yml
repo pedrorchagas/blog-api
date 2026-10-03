@@ -1,0 +1,14 @@
+info:
+  name: Edit
+  type: http
+
+http:
+  method: PUT
+  url: http://0.0.0.0:3000/post/1
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
