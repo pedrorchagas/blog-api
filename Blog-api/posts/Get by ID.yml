@@ -1,10 +1,10 @@
 info:
-  name: Create User
+  name: Get by ID
   type: http
 
 http:
-  method: POST
-  url: http://0.0.0.0:3000/user
+  method: GET
+  url: http://0.0.0.0:3000/post/1
   auth: inherit
 
 settings:

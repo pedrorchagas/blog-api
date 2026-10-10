@@ -84,7 +84,7 @@ async function editPostById({ req, res }) {
     const newPostData = req.body;
 
     await postService.editPostById({ postId: id, data: newPostData });
-    res.send({ message: 'O post foi editado com sucesso!' });
+    res.send({ ok: 'ok' });
   } catch (exception) {
     errorService.returnError(res, exception);
   }

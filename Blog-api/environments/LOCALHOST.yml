@@ -1,0 +1,4 @@
+name: LOCALHOST
+variables:
+  - name: URL
+    value: http://0.0.0.0:3000

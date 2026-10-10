@@ -1,10 +1,10 @@
 info:
-  name: Get all posts
+  name: Edit
   type: http
 
 http:
-  method: GET
-  url: http://0.0.0.0:3000/post
+  method: PUT
+  url: http://0.0.0.0:3000/post/1
   auth: inherit
 
 settings:

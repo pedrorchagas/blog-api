@@ -1,7 +1,7 @@
 opencollection: 1.0.0
 
 info:
-  name: blog-api
+  name: Blog-api
 bundled: false
 extensions:
   bruno:

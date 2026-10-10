@@ -56,9 +56,9 @@ async function deletePostById({ user, id }) {
 async function editPostById({ postId, data }) {
   try {
     const sequelize = await databaseService.getSequelizeInstance();
-    await postRepository.editPostById({ sequelize, postId, data });
-  } catch {
-    throw errorService.failEditPost;
+    await postRepository.editPostById({ sequelize, id: postId, data });
+  } catch (exception) {
+    throw errorService.errorPostEdit;
   }
 }
 

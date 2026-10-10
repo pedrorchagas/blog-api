@@ -1,10 +1,10 @@
 info:
-  name: Get post by id
+  name: Create
   type: http
 
 http:
-  method: GET
-  url: http://0.0.0.0/post/1
+  method: POST
+  url: "{{URL}}/user"
   auth: inherit
 
 settings:
