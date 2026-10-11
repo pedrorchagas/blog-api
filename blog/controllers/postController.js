@@ -56,12 +56,12 @@ async function getPostById({ req, res }) {
  */
 async function createPost({ req, res }) {
   try {
-    const { tittle, header, body } = req.body;
+    const { title, header, body } = req.body;
 
     const userId = req.user.id;
 
     const post = {
-      tittle,
+      title,
       header,
       body,
       userId,

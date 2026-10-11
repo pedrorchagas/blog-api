@@ -14,17 +14,17 @@ function validatePostNotFound(post) {
 }
 
 function validadeCreateInfoPost({
-  tittle, header, body, userId,
+  title, header, body, userId,
 }) {
   if (
-    typeof tittle !== 'string'
+    typeof title !== 'string'
     || typeof header !== 'string'
     || typeof body !== 'string'
     || typeof userId !== 'string'
   ) {
     throw errorService.infoNotNullOrEmpty;
   }
-  if (tittle === '' || header === '' || body === '' || userId === '') {
+  if (title === '' || header === '' || body === '' || userId === '') {
     throw errorService.infoNotNullOrEmpty;
   }
 }

@@ -9,7 +9,7 @@ function Post(sequelize) {
         type: DataTypes.INTEGER,
         default: 0,
       },
-      tittle: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },

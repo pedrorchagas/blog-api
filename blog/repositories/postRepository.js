@@ -6,7 +6,7 @@ async function getAllPosts({ sequelize, page = 1, limit = 10 }) {
   const offset = (safePage - 1) * safeLimit;
 
   const { rows, count } = await Post(sequelize).findAndCountAll({
-    attributes: ['id', 'tittle', 'header', 'createdAt'],
+    attributes: ['id', 'title', 'header', 'createdAt'],
     limit: safeLimit,
     offset,
     order: [['createdAt', 'DESC']],
@@ -30,7 +30,7 @@ async function createPost({ sequelize, post }) {
 
 async function getPostById({ sequelize, id }) {
   const post = await Post(sequelize).findOne({
-    attributes: ['id', 'tittle', 'header', 'createdAt'],
+    attributes: ['id', 'title', 'header', 'createdAt'],
     where: {
       id,
     },
