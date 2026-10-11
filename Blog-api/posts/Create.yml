@@ -6,6 +6,9 @@ info:
 http:
   method: POST
   url: "{{URL}}/post"
+  body:
+    type: json
+    data: ""
   auth:
     type: bearer
     token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJjbGViZXJAZ21haWwuY29tIiwiaWF0IjoxNzkxNjgwMzUwLCJleHAiOjE3OTE2ODM5NTB9.k3WBCP8En7ddZSAaExbRqTCxG8AGqxcZz2KkW5hRVYw

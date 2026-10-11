@@ -13,7 +13,16 @@ function validatePostNotFound(post) {
   if (post == null) throw errorService.postNotFound;
 }
 
+function validadeCreateInfoPost({
+  tittle, header, body, userId,
+}) {
+  if (tittle == null || header == null || body == null || userId == null) {
+    throw errorService.infoNotNull;
+  }
+}
+
 module.exports = {
   validatePostId,
   validatePostNotFound,
+  validadeCreateInfoPost,
 };

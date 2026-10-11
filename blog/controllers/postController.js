@@ -58,10 +58,6 @@ async function createPost({ req, res }) {
   try {
     const { tittle, header, body } = req.body;
 
-    // validar que as informações não são nulas
-    if (tittle == null || header == null || body == null)
-
-
     const userId = req.user.id;
 
     const post = {
@@ -70,6 +66,8 @@ async function createPost({ req, res }) {
       body,
       userId,
     };
+
+    validationsService.validadeCreateInfoPost(post);
 
     const newPost = await postService.createPost({ post });
 
