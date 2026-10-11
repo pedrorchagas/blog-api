@@ -31,5 +31,5 @@ module.exports = {
   tokenNotFound: CustomError(401, 6, 'O token de acesso não foi encontrado!'),
   errorPostEdit: CustomError(500, 7, 'Não foi possível editar o post.'),
   postNotFound: CustomError(404, 8, 'Não foi possível localizar o post.'),
-  infoNotNull: CustomError(500, 9, 'As informações não podem ser nulas ou vazias'),
+  infoNotNullOrEmpty: CustomError(500, 9, 'As informações não podem ser nulas ou vazias'),
 };

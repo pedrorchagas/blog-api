@@ -16,8 +16,16 @@ function validatePostNotFound(post) {
 function validadeCreateInfoPost({
   tittle, header, body, userId,
 }) {
-  if (tittle == null || header == null || body == null || userId == null) {
-    throw errorService.infoNotNull;
+  if (
+    typeof tittle !== 'string'
+    || typeof header !== 'string'
+    || typeof body !== 'string'
+    || typeof userId !== 'string'
+  ) {
+    throw errorService.infoNotNullOrEmpty;
+  }
+  if (tittle === '' || header === '' || body === '' || userId === '') {
+    throw errorService.infoNotNullOrEmpty;
   }
 }
 
