@@ -5,8 +5,10 @@ info:
 
 http:
   method: POST
-  url: http://0.0.0.0:3000/post
-  auth: inherit
+  url: "{{URL}}/post"
+  auth:
+    type: bearer
+    token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiZW1haWwiOiJjbGViZXJAZ21haWwuY29tIiwiaWF0IjoxNzkxNjgwMzUwLCJleHAiOjE3OTE2ODM5NTB9.k3WBCP8En7ddZSAaExbRqTCxG8AGqxcZz2KkW5hRVYw
 
 settings:
   encodeUrl: true

@@ -9,6 +9,11 @@ function validatePostId(id) {
   if (!Number.isInteger(Number(id))) throw errorService.postIdNotValid;
 }
 
+function validatePostNotFound(post) {
+  if (post == null) throw errorService.postNotFound;
+}
+
 module.exports = {
   validatePostId,
+  validatePostNotFound,
 };

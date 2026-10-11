@@ -40,6 +40,8 @@ async function getPostById({ req, res }) {
       id,
     });
 
+    validationsService.validatePostNotFound(post);
+
     res.send({ post });
   } catch (exception) {
     errorService.returnError(res, exception);
@@ -55,6 +57,11 @@ async function getPostById({ req, res }) {
 async function createPost({ req, res }) {
   try {
     const { tittle, header, body } = req.body;
+
+    // validar que as informações não são nulas
+    if (tittle == null || header == null || body == null)
+
+
     const userId = req.user.id;
 
     const post = {

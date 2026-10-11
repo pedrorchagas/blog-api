@@ -10,7 +10,7 @@ router.get('/', authMiddleware, async (req, res) => {
 });
 
 // Create
-router.post('/', async (req, res) => {
+router.post('/register', async (req, res) => {
   await userController.createUser({ req, res });
 });
 
